@@ -120,15 +120,14 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
         int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
-        if (direction == Direction.X_NEG) {
+
+        if (direction == Direction.Y_POS || direction == Direction.Y_NEG) {
             for (int inputSlots = 2; inputSlots < 6; inputSlots++) {
                 if (contents[inputSlots] == null || contents[inputSlots].stackSize < 64)
                     return inputSlots;
             }
             return 2;
-        }
-
-        if (direction == Direction.X_POS) {
+        } else if (direction == Direction.X_POS) {
             for (int outputSlots = 6; outputSlots < 14; outputSlots++) {
                 if (contents[outputSlots] != null)
                     return outputSlots;
@@ -144,13 +143,11 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
         int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
         int index = Sides.orientationLookUpHorizontal[6 * meta + direction.getSide()];
         direction = Direction.getDirectionFromSide(index);
-        if (direction == Direction.X_NEG)
+
+        if (direction == Direction.Y_POS || direction == Direction.Y_NEG)
             return Connection.INPUT;
 
-        if (direction == Direction.X_POS)
-            return Connection.OUTPUT;
-
-        return Connection.NONE;
+        return Connection.OUTPUT;
     }
 
     private static void setTrommelDrops() {
