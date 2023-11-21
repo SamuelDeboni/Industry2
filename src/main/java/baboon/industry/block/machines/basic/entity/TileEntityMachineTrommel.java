@@ -127,15 +127,13 @@ public class TileEntityMachineTrommel extends TileEntityEnergyConductorDamageabl
                     return inputSlots;
             }
             return 2;
-        } else if (direction == Direction.X_POS) {
+        } else {
             for (int outputSlots = 6; outputSlots < 14; outputSlots++) {
                 if (contents[outputSlots] != null)
                     return outputSlots;
             }
             return 6;
         }
-
-        return -1;
     }
 
     @Override
