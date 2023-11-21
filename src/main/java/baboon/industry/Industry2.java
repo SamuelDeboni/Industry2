@@ -7,14 +7,14 @@ import baboon.industry.recipe.IndustryRecipes;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import turniplabs.halplibe.helper.AchievementHelper;
 import turniplabs.halplibe.helper.NetworkHelper;
 import turniplabs.halplibe.helper.SoundHelper;
 
 public class Industry2 implements ModInitializer {
 
-    // "TODO" LIST
-    // Look into damageable crafting
-    // Achievements
+    // TODO LIST
+    // Fix MP GUI issues
 
     public static String MOD_ID = "industry";
     public static Logger logger = LoggerFactory.getLogger(MOD_ID);
@@ -30,12 +30,15 @@ public class Industry2 implements ModInitializer {
 
         SoundHelper.addSound(MOD_ID, "zap.wav");
         SoundHelper.addSound(MOD_ID, "laser.wav");
+        SoundHelper.addSound(MOD_ID, "tap.wav");
+        SoundHelper.addSound(MOD_ID, "alarm.wav");
 
         new IndustryConfig();
 
         new IndustryBlocks().initializeBlocks();
         new IndustryItems().initializeItems();
         new IndustryRecipes().initializeRecipes();
+        AchievementHelper.addPage(new IndustryAchievements());
 
         NetworkHelper.register(PacketOpenReactor.class, false, true);
 
